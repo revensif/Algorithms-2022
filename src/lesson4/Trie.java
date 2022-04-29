@@ -1,6 +1,7 @@
 package lesson4;
 
 import java.util.*;
+
 import kotlin.NotImplementedError;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -84,16 +85,57 @@ public class Trie extends AbstractSet<String> implements Set<String> {
 
     /**
      * Итератор для префиксного дерева
-     *
+     * <p>
      * Спецификация: {@link Iterator} (Ctrl+Click по Iterator)
-     *
+     * <p>
      * Сложная
      */
     @NotNull
     @Override
     public Iterator<String> iterator() {
-        // TODO
-        throw new NotImplementedError();
+        return new TrieIterator();
     }
 
+    public class TrieIterator implements Iterator<String> {
+        List<String> list = new ArrayList<>();
+        int index = 0;
+        boolean alreadyRemove = false;
+        String string;
+
+        private TrieIterator() {
+            fillWords("", root.children);
+        }
+
+        private void fillWords(String word, Map<Character, Node> children) {
+            if (root.children.isEmpty()) return;
+            for (char key : children.keySet())
+                if (key != 0) {
+                    fillWords(word + key, children.get(key).children);
+                } else {
+                    list.add(word);
+                }
+        }
+
+        @Override
+        public boolean hasNext() {
+            return index < list.size();
+        }
+
+        @Override
+        public String next() {
+            if (!hasNext()) throw new NoSuchElementException();
+            string = list.get(index++);
+            alreadyRemove = true;
+            return string;
+        }
+
+        //Оценка трудоёмкости T = O(N), где N - длина удаляемого слова
+        //Оценка ресурсоёмкости R = O(1)
+        @Override
+        public void remove() {
+            if (!alreadyRemove) throw new IllegalStateException();
+            Trie.this.remove(string);
+            alreadyRemove = false;
+        }
+    }
 }

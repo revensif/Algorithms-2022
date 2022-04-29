@@ -1,5 +1,6 @@
 package lesson2
 
+import lesson2.JavaAlgorithms
 import org.junit.jupiter.api.Tag
 import kotlin.test.Test
 

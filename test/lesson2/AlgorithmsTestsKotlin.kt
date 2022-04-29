@@ -7,24 +7,24 @@ class AlgorithmsTestsKotlin : AbstractAlgorithmsTests() {
     @Test
     @Tag("2")
     fun testOptimizeBuyAndSell() {
-        optimizeBuyAndSell { optimizeBuyAndSell(it) }
+        optimizeBuyAndSell { lesson2.optimizeBuyAndSell(it) }
     }
 
     @Test
     @Tag("2")
     fun testJosephTask() {
-        josephTask { menNumber, choiceInterval -> josephTask(menNumber, choiceInterval) }
+        josephTask { menNumber, choiceInterval -> lesson2.josephTask(menNumber, choiceInterval) }
     }
 
     @Test
     @Tag("4")
     fun testLongestCommonSubstring() {
-        longestCommonSubstring { first, second -> longestCommonSubstring(first, second) }
+        longestCommonSubstring { first, second -> lesson2.longestCommonSubstring(first, second) }
     }
 
     @Test
     @Tag("3")
     fun testCalcPrimesNumber() {
-        calcPrimesNumber { calcPrimesNumber(it) }
+        calcPrimesNumber { lesson2.calcPrimesNumber(it) }
     }
 }
